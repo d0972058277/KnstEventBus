@@ -1,15 +1,25 @@
+using System.Threading.Tasks;
+
 namespace KnstEventBus
 {
     public interface IEventBus
     {
-        void Publish(IntegrationEvent @event);
+        Task PublishAsync<T>(T @event) where T : IntegrationEvent;
 
-        void Subscribe<T, TH>()
+        Task AddPublisherAsync<T, TP>()
         where T : IntegrationEvent
-        where TH : IIntegrationEventHandler<T>;
+        where TP : IPublisher<T>;
 
-        void Unsubscribe<T, TH>()
+        Task RemovePublisherAsync<T, TP>()
         where T : IntegrationEvent
-        where TH : IIntegrationEventHandler<T>;
+        where TP : IPublisher<T>;
+
+        Task SubscribeAsync<T, TS>()
+        where T : IntegrationEvent
+        where TS : ISubscriber<T>;
+
+        Task UnsubscribeAsync<T, TS>()
+        where T : IntegrationEvent
+        where TS : ISubscriber<T>;
     }
 }

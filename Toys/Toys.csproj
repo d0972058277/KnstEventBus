@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Subs\" />
+    <Folder Include="Pubs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
+    <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
+  </ItemGroup>
+
 </Project>
