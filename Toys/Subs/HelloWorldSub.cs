@@ -6,7 +6,7 @@ using Toys.Models;
 namespace Toys.Subs
 {
     [Channel("helloworld")]
-    [Publish]
+    [Subscribe(typeof(HelloWorld))]
     public class HelloWorldSub : ISubscriber<HelloWorld>
     {
         public Task CloseChannelAsync()

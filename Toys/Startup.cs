@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnstAsyncApi.Generations;
 using KnstAsyncApi.Middlewares;
 using KnstEventBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Toys.Models;
 using Toys.Pubs;
@@ -21,6 +23,7 @@ namespace Toys
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
             services.AddScoped<IPublisher<HelloWorld>, HelloWorldPub>();
             services.AddScoped<ISubscriber<HelloWorld>, HelloWorldSub>();
         }
@@ -31,7 +34,6 @@ namespace Toys
             app.UseDeveloperExceptionPage();
 
             app.UseRouting();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod());
 
             app.UseMiddleware<AsyncApiMiddleware>();
             app.UseEndpoints(endpoints =>

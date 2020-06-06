@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using KnstAsyncApi.DocumentGenerations;
+using KnstAsyncApi.Generations;
 using KnstAsyncApi.Schemas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -28,7 +28,8 @@ namespace KnstAsyncApi.Middlewares
                 return;
             }
 
-            var document = documentGenerator.GetDocument();
+            var asyncApiDocument = documentGenerator.GetDocument();
+            await RespondWithAsyncApiSchemaJson(context.Response, asyncApiDocument);
         }
 
         private async Task RespondWithAsyncApiSchemaJson(HttpResponse response, AsyncApiDocument asyncApiDocument)

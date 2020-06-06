@@ -6,7 +6,7 @@ using Toys.Models;
 namespace Toys.Pubs
 {
     [Channel("helloworld")]
-    [Publish]
+    [Publish(typeof(HelloWorld))]
     public class HelloWorldPub : IPublisher<HelloWorld>
     {
         public Task CloseChannelAsync()
