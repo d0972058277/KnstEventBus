@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace KnstEventBus
 {
@@ -8,31 +9,22 @@ namespace KnstEventBus
 
         void Clear();
 
-        void AddChannel<T>(IChannel<T> subscriber)
+        void AddChannel<T>(IChannel<T> channel)
         where T : IntegrationEvent;
 
         void RemoveChannel<T, TC>()
         where T : IntegrationEvent
         where TC : IChannel<T>;
 
-        bool HasPublisherForEvent(Type eventType);
+        bool HasChannelForEvent(Type eventType);
 
-        bool HasPublisherForEvent<T>() where T : IntegrationEvent;
+        bool HasChannelForEvent<T>() where T : IntegrationEvent;
 
-        bool HasSubscriberForEvent(Type eventType);
-
-        bool HasSubscriberForEvent<T>() where T : IntegrationEvent;
+        IEnumerable<IChannel<T>> GetChannelsForEvent<T>()
+        where T : IntegrationEvent;
 
         IChannel<T> GetChannelForEvent<T, TC>()
         where T : IntegrationEvent
         where TC : IChannel<T>;
-
-        IPublisher<T> GetPublisherForEvent<T, TP>()
-        where T : IntegrationEvent
-        where TP : IPublisher<T>;
-
-        ISubscriber<T> GetSubscriberForEvent<T, TS>()
-        where T : IntegrationEvent
-        where TS : ISubscriber<T>;
     }
 }
