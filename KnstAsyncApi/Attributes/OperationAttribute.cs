@@ -3,15 +3,14 @@ using KnstAsyncApi.Attributes.Marks;
 
 namespace KnstAsyncApi.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
     public class OperationAttribute : Attribute, IChannelsMark
     {
-        public OperationAttribute(Type messagePayloadType)
+        public OperationAttribute(Type messageType)
         {
-            MessagePayloadType = messagePayloadType;
+            MessageType = messageType;
         }
 
-        public Type MessagePayloadType { get; }
+        public Type MessageType { get; }
         public string OperationId { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }

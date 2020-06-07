@@ -1,19 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using KnstAsyncApi.Generations;
 using KnstAsyncApi.Middlewares;
-using KnstEventBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
-using Toys.Models;
-using Toys.Pubs;
-using Toys.Subs;
 
 namespace Toys
 {
@@ -24,8 +15,6 @@ namespace Toys
         public void ConfigureServices(IServiceCollection services)
         {
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
-            services.AddScoped<IPublisher<HelloWorld>, HelloWorldPub>();
-            services.AddScoped<ISubscriber<HelloWorld>, HelloWorldSub>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

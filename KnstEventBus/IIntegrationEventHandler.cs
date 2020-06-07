@@ -2,15 +2,11 @@ using System.Threading.Tasks;
 
 namespace KnstEventBus
 {
-    public interface IIntegrationEventHandler<in TIntegrationEvent> : IIntegrationEventHandler
-    where TIntegrationEvent : IntegrationEvent
+    public interface IIntegrationEventHandler<T> : IIntegrationEventHandler
+    where T : IntegrationEvent
     {
-        Task HandleAsync(TIntegrationEvent @event);
+        Task HandleAsync(T @event);
     }
 
-    public interface IIntegrationEventHandler
-    {
-        Task OpenChannelAsync();
-        Task CloseChannelAsync();
-    }
+    public interface IIntegrationEventHandler { }
 }

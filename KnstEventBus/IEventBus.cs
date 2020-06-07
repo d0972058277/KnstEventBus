@@ -5,21 +5,13 @@ namespace KnstEventBus
     public interface IEventBus
     {
         Task PublishAsync<T>(T @event) where T : IntegrationEvent;
-
-        Task AddPublisherAsync<T, TP>()
+        
+        Task JoinChannel<T, TC>()
         where T : IntegrationEvent
-        where TP : IPublisher<T>;
+        where TC : IChannel<T>;
 
-        Task RemovePublisherAsync<T, TP>()
+        Task LeaveChannel<T, TC>()
         where T : IntegrationEvent
-        where TP : IPublisher<T>;
-
-        Task SubscribeAsync<T, TS>()
-        where T : IntegrationEvent
-        where TS : ISubscriber<T>;
-
-        Task UnsubscribeAsync<T, TS>()
-        where T : IntegrationEvent
-        where TS : ISubscriber<T>;
+        where TC : IChannel<T>;
     }
 }

@@ -22,55 +22,48 @@ namespace KnstAsyncApi.Generations
 
         public AsyncApiDocument GetDocument()
         {
-            var asyncApiDocumentMarks = GetAsyncApiDocumentMarks();
-
-            var channels = new Channels();
-            foreach (var asyncApiDocumentMark in asyncApiDocumentMarks)
-            {
-                var channelAttribute = (ChannelAttribute) asyncApiDocumentMark.GetCustomAttributes(typeof(ChannelAttribute), true).SingleOrDefault();
-                var channelField = new ChannelsFieldName(channelAttribute.Uri);
-                var channelItem = new ChannelItem();
-                if (channels.ContainsKey(channelField))
-                {
-                    channelItem = channels[channelField];
-                }
-                else
-                {
-                    channels.Add(channelField, channelItem);
-                }
-
-                var pub = (PublishAttribute) asyncApiDocumentMark.GetCustomAttributes(typeof(PublishAttribute), true).SingleOrDefault();
-                if (pub != null)
-                {
-                    var operation = new Operation()
-                    {
-                    OperationId = asyncApiDocumentMark.Name
-                    };
-                    channelItem.Publish = operation;
-                }
-                var sub = (SubscribeAttribute) asyncApiDocumentMark.GetCustomAttributes(typeof(SubscribeAttribute), true).SingleOrDefault();
-                if (sub != null)
-                {
-                    var operation = new Operation()
-                    {
-                    OperationId = asyncApiDocumentMark.Name
-                    };
-                    channelItem.Subscribe = operation;
-                }
-
-            }
-
             var result = (AsyncApiDocumentV2) _options.AsyncApi;
-            result.Channels = channels;
+            result.Channels = GenerateChannels();
             return result;
         }
 
-        private TypeInfo[] GetAsyncApiDocumentMarks()
+        private Channels GenerateChannels()
         {
-            var result = AppDomain.CurrentDomain.GetAssemblies()
+            var channels = new Channels();
+
+            var channelsMarksAssemblies = GetChannelsMarksAssemblies();
+            foreach (var cma in channelsMarksAssemblies)
+            {
+                var ca = (ChannelAttribute) cma.GetCustomAttributes(typeof(ChannelAttribute), true).SingleOrDefault();
+                var pa = (PublishAttribute) cma.GetCustomAttributes(typeof(PublishAttribute), true).SingleOrDefault();
+                var sa = (SubscribeAttribute) cma.GetCustomAttributes(typeof(SubscribeAttribute), true).SingleOrDefault();
+
+                var channelItem = new ChannelItem
+                {
+                    Description = ca.Description,
+                    // Parameters = mc.Channel.Parameters,
+                };
+            }
+
+            return channels;
+        }
+
+        private Operation GenerateOperation(TypeInfo cma, OperationAttribute operationAttribute)
+        {
+            var operation = new Operation
+            {
+                OperationId = operationAttribute.OperationId ?? cma.FullName + $".{operationAttribute.Type}"
+            };
+
+            return operation;
+        }
+
+        private TypeInfo[] GetChannelsMarksAssemblies()
+        {
+            var channelsMarksAssemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttributes(typeof(IChannelsMark), true).Length > 0))
                 .ToArray();
-            return result;
+            return channelsMarksAssemblies;
         }
     }
 }

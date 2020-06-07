@@ -2,8 +2,12 @@ using System.Threading.Tasks;
 
 namespace KnstEventBus
 {
-    public interface ISubscriber<in TIntegrationEvent> : ISubscriber, IIntegrationEventHandler<TIntegrationEvent> where TIntegrationEvent : IntegrationEvent
+    public interface ISubscriber<T> : ISubscriber, IIntegrationEventHandler<T> where T : IntegrationEvent
     {
+        bool HasChannel();
+        void JoinChannel(IChannel<T> channel);
+        void LeaveChannel();
+        bool IsSame(IChannel<T> channel);
         Task SubscribeAsync();
         Task UnsubscribeAsync();
     }
