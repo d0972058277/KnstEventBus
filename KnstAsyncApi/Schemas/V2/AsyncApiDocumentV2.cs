@@ -21,10 +21,10 @@ namespace KnstAsyncApi.Schemas.V2
         public Info Info { get; set; }
 
         [JsonProperty("servers")]
-        public Servers Servers { get; } = new Servers();
+        public Servers Servers { get; set; }
 
-        // [JsonProperty("defaultContentType")]
-        // public string DefaultContentType { get; set; } = "application/json";
+        [JsonProperty("defaultContentType")]
+        public string DefaultContentType { get; set; } = "application/json";
 
         [JsonProperty("channels")]
         public Channels Channels { get; set; } = new Channels();

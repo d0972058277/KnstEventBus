@@ -5,7 +5,8 @@ using Toys.Models;
 
 namespace Toys.Channels.HelloWorlds
 {
-    [Channel("toys/helloworld")]
+    [AsyncApi]
+    [Channel("pubsub/HelloWorld")]
     [MessagePayload(typeof(HelloWorld))]
     public class HelloWorldChannel : IChannel<HelloWorld>
     {

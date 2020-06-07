@@ -1,9 +1,8 @@
 using System;
-using KnstAsyncApi.Attributes.Marks;
 
 namespace KnstAsyncApi.Attributes
 {
-    public class OperationAttribute : Attribute, IChannelsMark
+    public class OperationAttribute : Attribute
     {
         public string OperationId { get; set; }
         public string Summary { get; set; }

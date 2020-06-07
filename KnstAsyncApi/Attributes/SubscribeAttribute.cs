@@ -1,9 +1,6 @@
-using System;
-using KnstAsyncApi.Attributes.Marks;
-
 namespace KnstAsyncApi.Attributes
 {
-    public class SubscribeAttribute : OperationAttribute, IChannelsMark
+    public class SubscribeAttribute : OperationAttribute
     {
         public override OperationType? @Type => OperationType.Subscribe;
     }

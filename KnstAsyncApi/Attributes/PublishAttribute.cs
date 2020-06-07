@@ -1,9 +1,6 @@
-using System;
-using KnstAsyncApi.Attributes.Marks;
-
 namespace KnstAsyncApi.Attributes
 {
-    public class PublishAttribute : OperationAttribute, IChannelsMark
+    public class PublishAttribute : OperationAttribute
     {
         public override OperationType? @Type => OperationType.Publish;
     }
