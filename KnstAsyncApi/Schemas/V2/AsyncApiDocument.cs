@@ -7,7 +7,7 @@ namespace KnstAsyncApi.Schemas.V2
     /// <summary>
     /// https://www.asyncapi.com/docs/specifications/2.0.0/#a-name-a2sobject-a-asyncapi-object
     /// </summary>
-    public class AsyncApiDocumentV2 : AsyncApiDocument
+    public class AsyncApiDocument
     {
         [JsonProperty("asyncapi")]
         [JsonConverter(typeof(StringEnumConverter))]

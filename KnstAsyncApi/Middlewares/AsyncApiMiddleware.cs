@@ -1,8 +1,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using KnstAsyncApi.Generations;
-using KnstAsyncApi.Schemas;
+using KnstAsyncApi.DocumrntGenerations;
+using KnstAsyncApi.Schemas.V2;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

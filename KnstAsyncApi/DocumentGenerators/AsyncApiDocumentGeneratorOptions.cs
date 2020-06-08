@@ -5,7 +5,7 @@ using KnstAsyncApi.Schemas;
 using KnstAsyncApi.Schemas.V2;
 using Newtonsoft.Json.Serialization;
 
-namespace KnstAsyncApi.Generations
+namespace KnstAsyncApi.DocumrntGenerations
 {
     public class AsyncApiDocumentGeneratorOptions
     {
@@ -13,7 +13,7 @@ namespace KnstAsyncApi.Generations
         /// The base asyncapi schema.
         /// This will be augmented with other information auto-discovered from attributes.
         /// </summary>
-        public AsyncApiDocument AsyncApi { get; set; } = new AsyncApiDocumentV2();
+        public AsyncApiDocument AsyncApi { get; set; } = new AsyncApiDocument();
 
         /// <summary>
         /// A list of marker types from assemblies to scan for Saunter attributes.
@@ -28,8 +28,8 @@ namespace KnstAsyncApi.Generations
         /// <summary>
         /// A function to select the name for a property.
         /// </summary>
-        public Func<PropertyInfo, string> PropertyNameSelector { get; set; } = prop => new CamelCaseNamingStrategy().GetPropertyName(prop.Name, false); 
-        
+        public Func<PropertyInfo, string> PropertyNameSelector { get; set; } = prop => new CamelCaseNamingStrategy().GetPropertyName(prop.Name, false);
+
         /// <summary>
         /// A list of filters that will be applied to the generated AsyncAPI document.
         /// </summary>
@@ -39,10 +39,15 @@ namespace KnstAsyncApi.Generations
         /// A list of filters that will be applies to any generated channels.
         /// </summary>
         // public IList<IChannelItemFilter> ChannelItemFilters { get; } = new List<IChannelItemFilter>();
-        
+
         /// <summary>
         /// A list of filters that will be applied to any generated Publish operations.
         /// </summary>
         // public IList<OperationFilter> OperationFilters { get; } = new List<OperationFilter>();
+
+        // 參考 swagger 加的
+        public bool UseInlineDefinitionsForEnums { get; set; } = true;
+        public bool IgnoreObsoleteProperties { get; set; } = true;
+        public Func<Type, string> DiscriminatorSelector { get; set; } = (Type type) => "$type";
     }
 }

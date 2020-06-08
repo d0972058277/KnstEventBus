@@ -1,6 +1,6 @@
 using System;
-using KnstAsyncApi.Generations;
-using KnstAsyncApi.Generations.SchemaGeneration;
+using KnstAsyncApi.DocumrntGenerations;
+using KnstAsyncApi.SchemaGenerations;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection

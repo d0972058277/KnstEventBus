@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KnstAsyncApi.Schemas.V2;
 
-namespace KnstAsyncApi.Generations.SchemaGeneration
+namespace KnstAsyncApi.SchemaGenerations
 {
     public class SchemaRepository : ISchemaRepository
     {

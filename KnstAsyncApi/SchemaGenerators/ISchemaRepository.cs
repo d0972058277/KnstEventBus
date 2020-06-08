@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using KnstAsyncApi.Schemas.V2;
 
-namespace KnstAsyncApi.Generations.SchemaGeneration
+namespace KnstAsyncApi.SchemaGenerations
 {
     public interface ISchemaRepository
     {

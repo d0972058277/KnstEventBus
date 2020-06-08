@@ -1,6 +1,7 @@
 using KnstAsyncApi.Schemas;
+using KnstAsyncApi.Schemas.V2;
 
-namespace KnstAsyncApi.Generations
+namespace KnstAsyncApi.DocumrntGenerations
 {
     public interface IAsyncApiDocumentGenerator
     {

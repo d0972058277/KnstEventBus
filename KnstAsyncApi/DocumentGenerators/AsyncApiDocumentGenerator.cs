@@ -2,13 +2,12 @@ using System;
 using System.Linq;
 using System.Reflection;
 using KnstAsyncApi.Attributes;
-using KnstAsyncApi.Generations.SchemaGeneration;
-using KnstAsyncApi.Schemas;
+using KnstAsyncApi.SchemaGenerations;
 using KnstAsyncApi.Schemas.V2;
 using Microsoft.Extensions.Options;
 using Namotion.Reflection;
 
-namespace KnstAsyncApi.Generations
+namespace KnstAsyncApi.DocumrntGenerations
 {
     public class AsyncApiDocumentGenerator : IAsyncApiDocumentGenerator
     {
@@ -17,8 +16,7 @@ namespace KnstAsyncApi.Generations
 
         public AsyncApiDocumentGenerator(IOptions<AsyncApiDocumentGeneratorOptions> options, ISchemaGenerator schemaGenerator)
         {
-            _options = options?.Value ??
-                throw new ArgumentNullException(nameof(options));
+            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             _schemaGenerator = schemaGenerator;
         }
 
@@ -26,7 +24,7 @@ namespace KnstAsyncApi.Generations
         {
             var schemaRepository = new SchemaRepository();
 
-            var asyncApi = (AsyncApiDocumentV2) _options.AsyncApi;
+            var asyncApi = _options.AsyncApi;
             asyncApi.Channels = GenerateChannels(schemaRepository);
             asyncApi.Components.Schemas = schemaRepository.Schemas;
 
@@ -40,7 +38,7 @@ namespace KnstAsyncApi.Generations
             var asyncApiTypeInfos = GetAsyncApiTypeInfos();
             foreach (var asyncApiTypeInfo in asyncApiTypeInfos)
             {
-                var channelAttribute = (ChannelAttribute) asyncApiTypeInfo.GetCustomAttributes(typeof(ChannelAttribute), true).Single();
+                var channelAttribute = (ChannelAttribute)asyncApiTypeInfo.GetCustomAttributes(typeof(ChannelAttribute), true).Single();
 
                 var methods = asyncApiTypeInfo.DeclaredMethods.Where(m => m.GetCustomAttribute(typeof(OperationAttribute), true) != null).ToArray();
 
@@ -65,7 +63,7 @@ namespace KnstAsyncApi.Generations
         {
             if (method == null) return null;
 
-            var operationAttribute = (OperationAttribute) method.GetCustomAttribute(typeof(OperationAttribute), true);
+            var operationAttribute = (OperationAttribute)method.GetCustomAttribute(typeof(OperationAttribute), true);
 
             var operation = new Operation
             {
@@ -80,7 +78,7 @@ namespace KnstAsyncApi.Generations
 
         private Message GenerateMessage(TypeInfo channelsMarksAssembly, ISchemaRepository schemaRepository)
         {
-            var messagePayloadAttribute = (MessagePayloadAttribute) channelsMarksAssembly.GetCustomAttributes(typeof(MessagePayloadAttribute), true).Single();
+            var messagePayloadAttribute = (MessagePayloadAttribute)channelsMarksAssembly.GetCustomAttributes(typeof(MessagePayloadAttribute), true).Single();
 
             var message = new Message
             {

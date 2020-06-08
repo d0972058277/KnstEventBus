@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Subs\" />
-    <Folder Include="Pubs\" />
+    <Compile Remove="Pubs\**" />
+    <Compile Remove="Subs\**" />
+    <Content Remove="Pubs\**" />
+    <Content Remove="Subs\**" />
+    <EmbeddedResource Remove="Pubs\**" />
+    <EmbeddedResource Remove="Subs\**" />
+    <None Remove="Pubs\**" />
+    <None Remove="Subs\**" />
   </ItemGroup>
 
   <ItemGroup>

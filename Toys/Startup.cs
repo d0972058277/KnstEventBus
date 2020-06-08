@@ -1,6 +1,7 @@
-using KnstAsyncApi.Generations;
-using KnstAsyncApi.Generations.SchemaGeneration;
+using KnstAsyncApi.DocumrntGenerations;
 using KnstAsyncApi.Middlewares;
+using KnstAsyncApi.SchemaGenerations;
+using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.Schemas.V2;
 using KnstEventBus;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Text.Json;
 using Toys.Channels.HelloWorlds;
 using Toys.Models;
 
@@ -21,19 +23,20 @@ namespace Toys
         {
             services.AddAsyncApiSchemaGeneration(options =>
             {
-                options.AsyncApi = new AsyncApiDocumentV2
+                options.AsyncApi = new AsyncApiDocument
                 {
-                Info = new Info("Toys API", "1.0.0")
-                {
-                Description = "Knst Toys.",
-                },
-                // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
-                // }
+                    Info = new Info("Toys API", "1.0.0")
+                    {
+                        Description = "Knst Toys.",
+                    },
+                    // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
+                    // }
                 };
             });
             services.AddOptions();
             services.TryAddTransient<ISchemaGenerator, SchemaGenerator>();
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
+            services.TryAddTransient<IDataContractResolver>(sp => new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
             services.AddSingleton<IChannel<HelloWorld>, HelloWorldChannel>();
         }
 
