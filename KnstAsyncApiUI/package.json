@@ -1,0 +1,8 @@
+{
+  "name": "knst-asyncapi-ui",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@asyncapi/generator": "^1.0.0-rc.2"
+  }
+}
