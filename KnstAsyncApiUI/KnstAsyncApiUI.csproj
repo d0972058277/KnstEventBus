@@ -3,11 +3,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
-    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.2.0"/>
-    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1.0"/>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.1"/>
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0"/>
+    <PackageReference Include="Jering.Javascript.NodeJS" Version="5.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js">
@@ -25,8 +24,8 @@
   </ItemGroup>
   <Target Name="NpmInstall" BeforeTargets="Build">
     <Exec Command="npm install" ContinueOnError="true">
-      <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
     </Exec>
-    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js/npm is required to build this project. To continue, please install Node.js from https://nodejs.org/ or Visual Studio Installer, and then restart your command prompt or IDE."/>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js/npm is required to build this project. To continue, please install Node.js from https://nodejs.org/ or Visual Studio Installer, and then restart your command prompt or IDE." />
   </Target>
 </Project>

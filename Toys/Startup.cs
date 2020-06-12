@@ -1,19 +1,14 @@
-using System;
-using System.IO;
 using System.Text.Json;
 using KnstAsyncApi.DocumrntGenerations;
-using KnstAsyncApi.Middlewares;
 using KnstAsyncApi.SchemaGenerations;
 using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.Schemas.V2;
-using KnstAsyncApiUI.Middlewares;
 using KnstEventBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
 using Toys.Channels.HelloWorlds;
 using Toys.Models;
 
@@ -25,7 +20,7 @@ namespace Toys
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAsyncApiSchemaGeneration(options =>
+            services.AddAsyncApi(options =>
             {
                 options.AsyncApi = new AsyncApiDocument
                 {
@@ -37,12 +32,7 @@ namespace Toys
                 // }
                 };
             });
-            services.AddOptions();
-            services.TryAddTransient<ISchemaGenerator, SchemaGenerator>();
-            services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
-            services.TryAddTransient<IDataContractResolver>(sp => new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
             services.AddSingleton<IChannel<HelloWorld>, HelloWorldChannel>();
-            services.AddNodeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,14 +42,7 @@ namespace Toys
 
             app.UseRouting();
 
-            app.UseMiddleware<AsyncApiMiddleware>();
-
-            app.UseMiddleware<AsyncApiUiMiddleware>();
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot"))
-            });
+            app.UseAsyncApi();
 
             app.UseEndpoints(endpoints =>
             {
