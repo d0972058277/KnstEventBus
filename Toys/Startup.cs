@@ -1,15 +1,19 @@
+using System;
+using System.IO;
+using System.Text.Json;
 using KnstAsyncApi.DocumrntGenerations;
 using KnstAsyncApi.Middlewares;
 using KnstAsyncApi.SchemaGenerations;
 using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.Schemas.V2;
+using KnstAsyncApiUI.Middlewares;
 using KnstEventBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Text.Json;
+using Microsoft.Extensions.FileProviders;
 using Toys.Channels.HelloWorlds;
 using Toys.Models;
 
@@ -25,12 +29,12 @@ namespace Toys
             {
                 options.AsyncApi = new AsyncApiDocument
                 {
-                    Info = new Info("Toys API", "1.0.0")
-                    {
-                        Description = "Knst Toys.",
-                    },
-                    // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
-                    // }
+                Info = new Info("Toys API", "1.0.0")
+                {
+                Description = "Knst Toys.",
+                },
+                // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
+                // }
                 };
             });
             services.AddOptions();
@@ -38,6 +42,7 @@ namespace Toys
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
             services.TryAddTransient<IDataContractResolver>(sp => new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
             services.AddSingleton<IChannel<HelloWorld>, HelloWorldChannel>();
+            services.AddNodeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +53,14 @@ namespace Toys
             app.UseRouting();
 
             app.UseMiddleware<AsyncApiMiddleware>();
+
+            app.UseMiddleware<AsyncApiUiMiddleware>();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot"))
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
