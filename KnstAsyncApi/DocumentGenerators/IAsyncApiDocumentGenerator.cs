@@ -1,4 +1,3 @@
-using KnstAsyncApi.Schemas;
 using KnstAsyncApi.Schemas.V2;
 
 namespace KnstAsyncApi.DocumrntGenerations

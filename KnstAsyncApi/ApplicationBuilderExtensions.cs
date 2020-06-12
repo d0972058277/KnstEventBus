@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using KnstAsyncApi.Middlewares;
-using KnstAsyncApiUI.Middlewares;
-using Microsoft.Extensions.FileProviders;
+﻿using KnstAsyncApi.Middlewares;
 
 namespace Microsoft.AspNetCore.Builder
 {

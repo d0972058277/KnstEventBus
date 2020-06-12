@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AnnotationsDataType = System.ComponentModel.DataAnnotations.DataType;
-using System.Text;
 using KnstAsyncApi.Schemas.V2;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
