@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddTransient<IDataContractResolver>(sp => new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
             services.TryAddTransient<ISchemaGenerator, SchemaGenerator>();
+            services.TryAddTransient<IMessageGenerator, MessageGenerator>();
 
             if (setupAction != null) services.Configure(setupAction);
 

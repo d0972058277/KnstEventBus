@@ -47,8 +47,6 @@ namespace KnstAsyncApi.SchemaGenerators
 
             var schema = shouldBeReferenced ? GenerateReferencedSchema(dataContract, schemaRepository) : GenerateInlineSchema(dataContract, schemaRepository);
 
-            //var schema = schemaRepository.GetOrAdd(type, schemaId, () => TypeSchemaFactory(type, schemaRepository));
-
             return schema;
         }
 
@@ -116,8 +114,8 @@ namespace KnstAsyncApi.SchemaGenerators
             return new Schema
             {
                 Type = "array",
-                Items = GenerateSchema(dataContract.ArrayItemType, schemaRepository),
-                UniqueItems = dataContract.UnderlyingType.IsSet() ? (bool?)true : null
+                    Items = GenerateSchema(dataContract.ArrayItemType, schemaRepository),
+                    UniqueItems = dataContract.UnderlyingType.IsSet() ? (bool?) true : null
             };
         }
 

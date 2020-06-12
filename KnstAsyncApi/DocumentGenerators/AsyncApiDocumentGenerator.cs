@@ -11,14 +11,16 @@ namespace KnstAsyncApi.DocumrntGenerations
 {
     public class AsyncApiDocumentGenerator : IAsyncApiDocumentGenerator
     {
-        private readonly ISchemaGenerator _schemaGenerator;
         private readonly AsyncApiDocumentGeneratorOptions _options;
+        private readonly ISchemaGenerator _schemaGenerator;
+        private readonly IMessageGenerator _messageGenerator;
 
-        public AsyncApiDocumentGenerator(IOptions<AsyncApiDocumentGeneratorOptions> options, ISchemaGenerator schemaGenerator)
+        public AsyncApiDocumentGenerator(IOptions<AsyncApiDocumentGeneratorOptions> options, ISchemaGenerator schemaGenerator, IMessageGenerator messageGenerator)
         {
             _options = options?.Value ??
                 throw new ArgumentNullException(nameof(options));
             _schemaGenerator = schemaGenerator;
+            _messageGenerator = messageGenerator;
         }
 
         public AsyncApiDocument GetDocument()
@@ -73,36 +75,21 @@ namespace KnstAsyncApi.DocumrntGenerations
                 OperationId = operationAttribute.OperationId ?? asyncApiTypeInfo.FullName + $".{operationAttribute.Type}",
                 Summary = operationAttribute.Summary ?? method.GetXmlDocsSummary(),
                 Description = operationAttribute.Description ?? (method.GetXmlDocsRemarks() != "" ? method.GetXmlDocsRemarks() : null),
-                Message = GenerateMessage(asyncApiTypeInfo, schemaRepository, messageRepository)
+                Message = GenerateReferenceOfMessage(asyncApiTypeInfo, schemaRepository, messageRepository)
             };
 
             return operation;
         }
 
-        private Reference GenerateMessage(TypeInfo channelsMarksAssembly, SchemaRepository schemaRepository, MessageRepository messageRepository)
+        private Reference GenerateReferenceOfMessage(TypeInfo channelsMarksAssembly, SchemaRepository schemaRepository, MessageRepository messageRepository)
         {
             var messageAttribute = (MessageAttribute) channelsMarksAssembly.GetCustomAttributes(typeof(MessageAttribute), true).Single();
+            var payloadType = messageAttribute.PayloadType;
 
-            _schemaGenerator.GenerateSchema(messageAttribute.PayloadType, schemaRepository);
-            messageRepository.GetOrAdd(messageAttribute.PayloadType, _options.SchemaIdSelector(messageAttribute.PayloadType), () =>
-            {
-                var message = new Message
-                {
-                Title = messageAttribute.Title,
-                Name = messageAttribute.Name,
-                Payload = new Reference(_options.SchemaIdSelector(messageAttribute.PayloadType), ReferenceType.Schema)
-                };
-                return @message;
-            });
-            var @ref = new Reference(_options.SchemaIdSelector(messageAttribute.PayloadType), ReferenceType.Message);
+            _schemaGenerator.GenerateSchema(payloadType, schemaRepository);
+            _messageGenerator.GenerateMessage(payloadType, messageRepository, messageAttribute);
 
-            // var message = new Message
-            // {
-            //     Payload = _schemaGenerator.GenerateSchema(messagePayloadAttribute.PayloadType, schemaRepository),
-            //     // todo: all the other properties... message has a lot!
-            // };
-
-            return @ref;
+            return new Reference(_options.SchemaIdSelector(payloadType), ReferenceType.Message);
         }
 
         private TypeInfo[] GetAsyncApiTypeInfos()

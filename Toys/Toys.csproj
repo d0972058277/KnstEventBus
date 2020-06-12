@@ -2,22 +2,25 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>bin\Debug\netcoreapp3.1\Toys.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Pubs\**"/>
-    <Compile Remove="Subs\**"/>
-    <Content Remove="Pubs\**"/>
-    <Content Remove="Subs\**"/>
-    <EmbeddedResource Remove="Pubs\**"/>
-    <EmbeddedResource Remove="Subs\**"/>
-    <None Remove="Pubs\**"/>
-    <None Remove="Subs\**"/>
+    <Compile Remove="Pubs\**" />
+    <Compile Remove="Subs\**" />
+    <Content Remove="Pubs\**" />
+    <Content Remove="Subs\**" />
+    <EmbeddedResource Remove="Pubs\**" />
+    <EmbeddedResource Remove="Subs\**" />
+    <None Remove="Pubs\**" />
+    <None Remove="Subs\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj"/>
-    <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj"/>
-    <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj"/>
+    <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
+    <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
+    <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5"/>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5" />
   </ItemGroup>
 </Project>

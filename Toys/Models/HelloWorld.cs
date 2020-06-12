@@ -2,6 +2,9 @@ using KnstEventBus;
 
 namespace Toys.Models
 {
+    /// <summary>
+    /// HelloWorld Summery
+    /// </summary>
     public class HelloWorld : IntegrationEvent
     {
         public string[] Messages { get; set; }

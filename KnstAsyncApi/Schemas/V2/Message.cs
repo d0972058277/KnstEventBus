@@ -32,6 +32,9 @@ namespace KnstAsyncApi.Schemas.V2
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("summary")]
+        public string Summary { get; set; }
+
         [JsonProperty("tags")]
         public ISet<Tag> Tags { get; set; } = new HashSet<Tag>();
 
