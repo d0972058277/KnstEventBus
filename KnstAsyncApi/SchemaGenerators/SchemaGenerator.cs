@@ -10,7 +10,7 @@ using KnstAsyncApi.Schemas.V2;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace KnstAsyncApi.SchemaGenerations
+namespace KnstAsyncApi.SchemaGenerators
 {
     public class SchemaGenerator : ISchemaGenerator
     {
@@ -24,14 +24,14 @@ namespace KnstAsyncApi.SchemaGenerations
             _dataContractResolver = dataContractResolver;
         }
 
-        public ISchema GenerateSchema(Type type, ISchemaRepository schemaRepository, MemberInfo memberInfo = null, ParameterInfo parameterInfo = null)
+        public ISchema GenerateSchema(Type type, SchemaRepository schemaRepository, MemberInfo memberInfo = null, ParameterInfo parameterInfo = null)
         {
             var schema = GenerateSchemaForType(type, schemaRepository);
 
             return schema;
         }
 
-        private ISchema GenerateSchemaForType(Type type, ISchemaRepository schemaRepository)
+        private ISchema GenerateSchemaForType(Type type, SchemaRepository schemaRepository)
         {
             var schemaId = _options.SchemaIdSelector(type);
             var dataContract = _dataContractResolver.GetDataContractForType(type);
@@ -52,7 +52,7 @@ namespace KnstAsyncApi.SchemaGenerations
             return schema;
         }
 
-        private ISchema GenerateReferencedSchema(DataContract dataContract, ISchemaRepository schemaRepository)
+        private ISchema GenerateReferencedSchema(DataContract dataContract, SchemaRepository schemaRepository)
         {
             return schemaRepository.GetOrAdd(
                 dataContract.UnderlyingType,
@@ -65,7 +65,7 @@ namespace KnstAsyncApi.SchemaGenerations
                 });
         }
 
-        private Schema GenerateInlineSchema(DataContract dataContract, ISchemaRepository schemaRepository)
+        private Schema GenerateInlineSchema(DataContract dataContract, SchemaRepository schemaRepository)
         {
             if (dataContract.DataType == DataType.Unknown)
                 return new Schema();
@@ -80,7 +80,7 @@ namespace KnstAsyncApi.SchemaGenerations
                 return GeneratePrimitiveSchema(dataContract);
         }
 
-        private Schema GenerateObjectSchema(DataContract dataContract, ISchemaRepository schemaRepository)
+        private Schema GenerateObjectSchema(DataContract dataContract, SchemaRepository schemaRepository)
         {
             var schema = new Schema
             {
@@ -104,14 +104,14 @@ namespace KnstAsyncApi.SchemaGenerations
 
             return schema;
         }
-        private ISchema GeneratePropertySchema(DataProperty serializerMember, ISchemaRepository schemaRepository)
+        private ISchema GeneratePropertySchema(DataProperty serializerMember, SchemaRepository schemaRepository)
         {
             var schema = GenerateSchemaForType(serializerMember.MemberType, schemaRepository);
 
             return schema;
         }
 
-        private Schema GenerateArraySchema(DataContract dataContract, ISchemaRepository schemaRepository)
+        private Schema GenerateArraySchema(DataContract dataContract, SchemaRepository schemaRepository)
         {
             return new Schema
             {
@@ -135,7 +135,7 @@ namespace KnstAsyncApi.SchemaGenerations
                 schema.Format = null;
                 schema.Enum = dataContract.EnumValues
                     .Distinct()
-                    .Select(value => value.ToString()) // 預設 Enum 轉字串
+                    .Select(value => value.ToString()) // ??�設 Enum 轉�?�串
                     .ToList();
             }
 

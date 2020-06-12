@@ -1,6 +1,6 @@
 using System.Text.Json;
 using KnstAsyncApi.DocumrntGenerations;
-using KnstAsyncApi.SchemaGenerations;
+using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.Schemas.V2;
 using KnstEventBus;

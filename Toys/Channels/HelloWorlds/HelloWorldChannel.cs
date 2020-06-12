@@ -7,7 +7,7 @@ namespace Toys.Channels.HelloWorlds
 {
     [AsyncApi]
     [Channel("pubsub/HelloWorld")]
-    [MessagePayload(typeof(HelloWorld))]
+    [Message(typeof(HelloWorld))]
     public class HelloWorldChannel : IChannel<HelloWorld>
     {
         [Publish]

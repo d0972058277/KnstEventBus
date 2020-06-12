@@ -27,7 +27,8 @@ namespace KnstAsyncApi.Schemas.V2
         public IDictionary<string, OperationBindings> Bindings { get; set; } = new Dictionary<string, OperationBindings>();
 
         [JsonProperty("message")]
-        public Message Message { get; set; }
+        // public Message Message { get; set; }
+        public Reference Message { get; set; }
 
         [JsonProperty("traits")]
         public IList<IOperationTrait> Traits { get; set; } = new List<IOperationTrait>();

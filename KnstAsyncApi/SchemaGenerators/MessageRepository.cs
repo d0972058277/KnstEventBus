@@ -5,13 +5,13 @@ using KnstAsyncApi.Schemas.V2;
 
 namespace KnstAsyncApi.SchemaGenerators
 {
-    public class SchemaRepository
+    public class MessageRepository
     {
         private Dictionary<Type, string> _reservedIds = new Dictionary<Type, string>();
 
-        public IDictionary<ComponentFieldName, Schema> Schemas { get; } = new Dictionary<ComponentFieldName, Schema>();
+        public IDictionary<ComponentFieldName, Message> Messages { get; } = new Dictionary<ComponentFieldName, Message>();
 
-        public ISchema GetOrAdd(Type type, string schemaId, Func<Schema> factory)
+        public Message GetOrAdd(Type type, string schemaId, Func<Message> factory)
         {
             if (!_reservedIds.TryGetValue(type, out var reservedId))
             {
@@ -19,14 +19,14 @@ namespace KnstAsyncApi.SchemaGenerators
                 // Reserving the id first ensures that the factoryMethod will only be invoked once for a given type, even in recurrsive scenarios.
                 // If subsequent calls are made for the same type, a simple reference will be created instead.
                 ReserveIdFor(type, schemaId);
-                Schemas.Add(schemaId, factory());
+                Messages.Add(schemaId, factory());
             }
             else
             {
                 schemaId = reservedId;
             }
 
-            return new Reference(schemaId, ReferenceType.Schema);
+            return Messages[schemaId];
         }
 
         private void ReserveIdFor(Type type, string schemaId)

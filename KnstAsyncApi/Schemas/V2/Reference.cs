@@ -29,6 +29,8 @@ namespace KnstAsyncApi.Schemas.V2
     /// </summary>
     public class ReferenceType
     {
+        public static readonly ReferenceType Message = new ReferenceType(nameof(Message), "#/components/messages/{0}");
+        
         public static readonly ReferenceType Schema = new ReferenceType(nameof(Schema), "#/components/schemas/{0}");
 
         public static readonly ReferenceType MessageTrait = new ReferenceType(nameof(MessageTrait), "#/components/messageTraits/{0}");

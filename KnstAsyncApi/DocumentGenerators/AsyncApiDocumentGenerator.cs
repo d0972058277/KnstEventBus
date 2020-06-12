@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using KnstAsyncApi.Attributes;
-using KnstAsyncApi.SchemaGenerations;
+using KnstAsyncApi.SchemaGenerators;
 using KnstAsyncApi.Schemas.V2;
 using Microsoft.Extensions.Options;
 using Namotion.Reflection;
@@ -16,29 +16,32 @@ namespace KnstAsyncApi.DocumrntGenerations
 
         public AsyncApiDocumentGenerator(IOptions<AsyncApiDocumentGeneratorOptions> options, ISchemaGenerator schemaGenerator)
         {
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _options = options?.Value ??
+                throw new ArgumentNullException(nameof(options));
             _schemaGenerator = schemaGenerator;
         }
 
         public AsyncApiDocument GetDocument()
         {
             var schemaRepository = new SchemaRepository();
+            var messageRepository = new MessageRepository();
 
             var asyncApi = _options.AsyncApi;
-            asyncApi.Channels = GenerateChannels(schemaRepository);
+            asyncApi.Channels = GenerateChannels(schemaRepository, messageRepository);
+            asyncApi.Components.Messages = messageRepository.Messages;
             asyncApi.Components.Schemas = schemaRepository.Schemas;
 
             return asyncApi;
         }
 
-        private Channels GenerateChannels(ISchemaRepository schemaRepository)
+        private Channels GenerateChannels(SchemaRepository schemaRepository, MessageRepository messageRepository)
         {
             var channels = new Channels();
 
             var asyncApiTypeInfos = GetAsyncApiTypeInfos();
             foreach (var asyncApiTypeInfo in asyncApiTypeInfos)
             {
-                var channelAttribute = (ChannelAttribute)asyncApiTypeInfo.GetCustomAttributes(typeof(ChannelAttribute), true).Single();
+                var channelAttribute = (ChannelAttribute) asyncApiTypeInfo.GetCustomAttributes(typeof(ChannelAttribute), true).Single();
 
                 var methods = asyncApiTypeInfo.DeclaredMethods.Where(m => m.GetCustomAttribute(typeof(OperationAttribute), true) != null).ToArray();
 
@@ -49,8 +52,8 @@ namespace KnstAsyncApi.DocumrntGenerations
                 {
                     Description = channelAttribute.Description,
                     // Parameters = mc.Channel.Parameters,
-                    Publish = GenerateOperation(asyncApiTypeInfo, publishMethod, schemaRepository),
-                    Subscribe = GenerateOperation(asyncApiTypeInfo, subscribeMethod, schemaRepository)
+                    Publish = GenerateOperation(asyncApiTypeInfo, publishMethod, schemaRepository, messageRepository),
+                    Subscribe = GenerateOperation(asyncApiTypeInfo, subscribeMethod, schemaRepository, messageRepository)
                 };
 
                 channels.Add(channelAttribute.Uri, channelItem);
@@ -59,34 +62,47 @@ namespace KnstAsyncApi.DocumrntGenerations
             return channels;
         }
 
-        private Operation GenerateOperation(TypeInfo asyncApiTypeInfo, MethodInfo method, ISchemaRepository schemaRepository)
+        private Operation GenerateOperation(TypeInfo asyncApiTypeInfo, MethodInfo method, SchemaRepository schemaRepository, MessageRepository messageRepository)
         {
             if (method == null) return null;
 
-            var operationAttribute = (OperationAttribute)method.GetCustomAttribute(typeof(OperationAttribute), true);
+            var operationAttribute = (OperationAttribute) method.GetCustomAttribute(typeof(OperationAttribute), true);
 
             var operation = new Operation
             {
                 OperationId = operationAttribute.OperationId ?? asyncApiTypeInfo.FullName + $".{operationAttribute.Type}",
                 Summary = operationAttribute.Summary ?? method.GetXmlDocsSummary(),
                 Description = operationAttribute.Description ?? (method.GetXmlDocsRemarks() != "" ? method.GetXmlDocsRemarks() : null),
-                Message = GenerateMessage(asyncApiTypeInfo, schemaRepository)
+                Message = GenerateMessage(asyncApiTypeInfo, schemaRepository, messageRepository)
             };
 
             return operation;
         }
 
-        private Message GenerateMessage(TypeInfo channelsMarksAssembly, ISchemaRepository schemaRepository)
+        private Reference GenerateMessage(TypeInfo channelsMarksAssembly, SchemaRepository schemaRepository, MessageRepository messageRepository)
         {
-            var messagePayloadAttribute = (MessagePayloadAttribute)channelsMarksAssembly.GetCustomAttributes(typeof(MessagePayloadAttribute), true).Single();
+            var messageAttribute = (MessageAttribute) channelsMarksAssembly.GetCustomAttributes(typeof(MessageAttribute), true).Single();
 
-            var message = new Message
+            _schemaGenerator.GenerateSchema(messageAttribute.PayloadType, schemaRepository);
+            messageRepository.GetOrAdd(messageAttribute.PayloadType, _options.SchemaIdSelector(messageAttribute.PayloadType), () =>
             {
-                Payload = _schemaGenerator.GenerateSchema(messagePayloadAttribute.MessagePayloadType, schemaRepository),
-                // todo: all the other properties... message has a lot!
-            };
+                var message = new Message
+                {
+                Title = messageAttribute.Title,
+                Name = messageAttribute.Name,
+                Payload = new Reference(_options.SchemaIdSelector(messageAttribute.PayloadType), ReferenceType.Schema)
+                };
+                return @message;
+            });
+            var @ref = new Reference(_options.SchemaIdSelector(messageAttribute.PayloadType), ReferenceType.Message);
 
-            return message;
+            // var message = new Message
+            // {
+            //     Payload = _schemaGenerator.GenerateSchema(messagePayloadAttribute.PayloadType, schemaRepository),
+            //     // todo: all the other properties... message has a lot!
+            // };
+
+            return @ref;
         }
 
         private TypeInfo[] GetAsyncApiTypeInfos()
