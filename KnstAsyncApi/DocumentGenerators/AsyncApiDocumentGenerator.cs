@@ -52,7 +52,7 @@ namespace KnstAsyncApi.DocumrntGenerations
 
                 var channelItem = new ChannelItem
                 {
-                    Description = channelAttribute.Description,
+                    Description = channelAttribute.Description ?? asyncApiTypeInfo.GetXmlDocsSummary(),
                     // Parameters = mc.Channel.Parameters,
                     Publish = GenerateOperation(asyncApiTypeInfo, publishMethod, schemaRepository, messageRepository),
                     Subscribe = GenerateOperation(asyncApiTypeInfo, subscribeMethod, schemaRepository, messageRepository)
