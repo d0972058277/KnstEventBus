@@ -11,8 +11,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddAsyncApi(this IServiceCollection services, Action<AsyncApiDocumentGeneratorOptions> setupAction)
         {
-            services.AddAsyncApiUI();
-
             services.AddOptions();
 
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();

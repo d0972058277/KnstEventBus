@@ -7,7 +7,7 @@ namespace KnstAsyncApi.Attributes
         public MessageAttribute(Type payloadType)
         {
             PayloadType = payloadType;
-            Title = PayloadType.Name;
+            Title = PayloadType.FullName;
             Name = PayloadType.Name;
         }
 

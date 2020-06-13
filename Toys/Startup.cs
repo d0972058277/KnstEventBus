@@ -26,14 +26,15 @@ The Smartylighting Streetlights API allows you to remotely manage the city light
 
 ### Check out its awesome features:
 
-* Turn a specific streetlight on/off ?
-* Dim a specific streetlight ?
-* Receive real-time information about environmental lighting conditions ?"
+* Turn a specific streetlight on/off 🌃
+* Dim a specific streetlight 😎
+* Receive real-time information about environmental lighting conditions 📈"
                 }
                 // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
                 // }
                 };
             });
+            services.AddAsyncApiUI();
 
             services.AddTransient<IChannel<LightMeasured>, LightingMeasuredChannel>();
             services.AddTransient<IChannel<TurnOnOff>, StreetlightTurnOnOffChannel>();
@@ -48,6 +49,7 @@ The Smartylighting Streetlights API allows you to remotely manage the city light
             app.UseRouting();
 
             app.UseAsyncApi();
+            app.UseAsyncApiUI();
 
             app.UseEndpoints(endpoints =>
             {

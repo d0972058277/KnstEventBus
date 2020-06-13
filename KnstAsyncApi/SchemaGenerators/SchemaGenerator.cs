@@ -6,6 +6,7 @@ using System.Reflection;
 using KnstAsyncApi.DocumrntGenerations;
 using KnstAsyncApi.Schemas.V2;
 using Microsoft.Extensions.Options;
+using Namotion.Reflection;
 
 namespace KnstAsyncApi.SchemaGenerators
 {
@@ -102,6 +103,18 @@ namespace KnstAsyncApi.SchemaGenerators
         private ISchema GeneratePropertySchema(DataProperty serializerMember, SchemaRepository schemaRepository)
         {
             var schema = GenerateSchemaForType(serializerMember.MemberType, schemaRepository);
+            var customAttributes = serializerMember.MemberInfo?.GetCustomAttributes(true);
+            var memberSummary = serializerMember.MemberInfo?.GetXmlDocsSummary();
+
+            if (!string.IsNullOrWhiteSpace(memberSummary) && schema is Schema)
+            {
+                (schema as Schema).Description = memberSummary;
+            }
+
+            if (serializerMember.MemberInfo != null && schema is Schema)
+            {
+                (schema as Schema).ApplyCustomAttributes(customAttributes);
+            }
 
             return schema;
         }

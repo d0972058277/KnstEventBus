@@ -7,8 +7,6 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseAsyncApi(this IApplicationBuilder app)
         {
             app.UseMiddleware<AsyncApiMiddleware>();
-            app.UseAsyncApiUI();
-
             return app;
         }
     }
