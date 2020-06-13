@@ -1,6 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.0.0-pre</PackageVersion>
+    <Authors>PorriDG3</Authors>
+    <Owners>PorriDG3</Owners>
+    <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
+    <Summary>AsyncApi code-first document ui-view</Summary>
+    <Title>KnstAsyncApiUI</Title>
+    <Description>AsyncApi code-first document ui-view</Description>
+    <Copyright>PorriDG3</Copyright>
+    <PackOnBuild>true</PackOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>AsyncApiUI;asyncapiui;KnstAsyncApiUI;knstasyncapiui;codefirst;code-first;documentation-generator;</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Jering.Javascript.NodeJS" Version="5.4.0" />

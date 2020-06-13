@@ -1,6 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.0.0-pre</PackageVersion>
+    <Authors>PorriDG3</Authors>
+    <Owners>PorriDG3</Owners>
+    <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
+    <Summary>AsyncApi code-first document generator</Summary>
+    <Title>KnstAsyncApi</Title>
+    <Description>AsyncApi code-first document generator</Description>
+    <Copyright>PorriDG3</Copyright>
+    <PackOnBuild>true</PackOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>AsyncApi;asyncapi;KnstAsyncApi;knstasyncapi;codefirst;code-first;documentation-generator;</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
