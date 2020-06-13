@@ -29,7 +29,7 @@
     <Content Include="package-lock.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="node_modules/**/*">
+    <Content Include="node_modules/**/*" Exclude="**/*/*.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
