@@ -40,7 +40,7 @@ public class HelloWorldChannel : IChannel<HelloWorld>
     /// HelloWorld Pub Summary
     /// </summary>
     [Publish]
-    public Task PublishAsync(LightMeasured @event) => Task.CompletedTask;
+    public Task PublishAsync(HelloWorld @event) => Task.CompletedTask;
 
     /// <summary>
     /// HelloWorld Sub Summary
