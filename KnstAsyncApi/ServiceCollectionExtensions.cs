@@ -3,6 +3,7 @@ using System.Text.Json;
 using KnstAsyncApi.DocumrntGenerations;
 using KnstAsyncApi.SchemaGenerators;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Newtonsoft.Json;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -14,10 +15,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddOptions();
 
-            services.TryAddTransient<IDataContractResolver>(sp => new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
             services.TryAddTransient<IAsyncApiDocumentGenerator, AsyncApiDocumentGenerator>();
             services.TryAddTransient<ISchemaGenerator, SchemaGenerator>();
             services.TryAddTransient<IMessageGenerator, MessageGenerator>();
+            services.TryAddTransient<IDataContractResolver, NewtonsoftDataContractResolver>();
+            services.TryAddTransient<JsonSerializerSettings>();
 
             if (setupAction != null) services.Configure(setupAction);
 
