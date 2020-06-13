@@ -2,6 +2,7 @@ using System;
 
 namespace KnstAsyncApi.Attributes
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class MessageAttribute : Attribute
     {
         public MessageAttribute(Type payloadType)

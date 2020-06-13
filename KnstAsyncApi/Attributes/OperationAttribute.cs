@@ -2,6 +2,7 @@ using System;
 
 namespace KnstAsyncApi.Attributes
 {
+    [AttributeUsage(AttributeTargets.Method)]
     public class OperationAttribute : Attribute
     {
         public string OperationId { get; set; }
