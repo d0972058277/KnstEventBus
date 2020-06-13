@@ -59,4 +59,5 @@ https://{domain-host}/asyncapi/asyncapi.json
 https://{domain-host}/asyncapi/index.html  
 ```https://localhost:5001/asyncapi/index.html```  
 
-You can run my [toys](https://github.com/d0972058277/KnstEventBus/tree/master/Toys) to get example.
+You can run my [toys](https://github.com/d0972058277/KnstEventBus/tree/master/Toys) to get example.  
+![toys-asyncapi-document](https://raw.githubusercontent.com/d0972058277/KnstEventBus/master/Images/toys-asyncapi-document.png)
