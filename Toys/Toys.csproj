@@ -20,7 +20,4 @@
     <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
     <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5" />
-  </ItemGroup>
 </Project>
