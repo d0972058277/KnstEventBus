@@ -221,7 +221,7 @@ namespace KnstAsyncApi.SchemaGenerators
             [typeof(DateTimeOffset)] = Tuple.Create(DataType.String, "date-time"),
             [typeof(Guid)] = Tuple.Create(DataType.String, "uuid"),
             [typeof(Uri)] = Tuple.Create(DataType.String, "uri"),
-            [typeof(TimeSpan)] = Tuple.Create(DataType.String, "date-span")
+            [typeof(TimeSpan)] = Tuple.Create(DataType.String, "time-span")
         };
     }
 }

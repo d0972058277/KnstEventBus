@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Toys.Channels.HelloWorlds;
+using Toys.Channels;
 using Toys.Models;
 
 namespace Toys
@@ -21,13 +21,23 @@ namespace Toys
                 {
                 Info = new Info("Toys API", "1.0.0")
                 {
-                Description = "Knst Toys.",
-                },
+                Description = @"|
+The Smartylighting Streetlights API allows you to remotely manage the city lights.
+
+### Check out its awesome features:
+
+* Turn a specific streetlight on/off ?
+* Dim a specific streetlight ?
+* Receive real-time information about environmental lighting conditions ?"
+                }
                 // Servers = { { "mosquitto", new Server("test.mosquitto.org", "mqtt") }
                 // }
                 };
             });
-            services.AddSingleton<IChannel<HelloWorld>, HelloWorldChannel>();
+
+            services.AddTransient<IChannel<LightMeasured>, LightingMeasuredChannel>();
+            services.AddTransient<IChannel<TurnOnOff>, StreetlightTurnOnOffChannel>();
+            services.AddTransient<IChannel<DimLight>, StreetlightDimChannel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
