@@ -3,7 +3,7 @@
 [domaindrivendev/Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)  
 [dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers/tree/dotnet3-migration/dev-dotnet3)
 ***  
-# KnstAsyncApi
+# KnstAsyncApi & KnstAsyncApiUI
 ### Register in Startup.cs ConfigureServices
 ```
 services.AddAsyncApi(options =>
@@ -16,10 +16,12 @@ services.AddAsyncApi(options =>
         }
     };
 });
+services.AddAsyncApiUI();
 ```
 ### Use middleware
 ```
 app.UseAsyncApi();
+app.UseAsyncApiUI();
 ```
 ### Add AsyncApi document mark  
 [[AsyncApi]](https://github.com/d0972058277/KnstEventBus/blob/master/KnstAsyncApi/Attributes/AsyncApiAttribute.cs)  
@@ -53,6 +55,8 @@ public class HelloWorldChannel : IChannel<HelloWorld>
 ```
 ### Visit your document  
 https://{domain-host}/asyncapi/asyncapi.json  
-```https://localhost:5001/asyncapi/asyncapi.json```
+```https://localhost:5001/asyncapi/asyncapi.json```  
+https://{domain-host}/asyncapi/index.html  
+```https://localhost:5001/asyncapi/index.html```  
 
 You can run my [toys](https://github.com/d0972058277/KnstEventBus/tree/master/Toys) to get example.
