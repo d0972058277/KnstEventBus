@@ -4,7 +4,7 @@
 [domaindrivendev/Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)  
 [dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers/tree/dotnet3-migration/dev-dotnet3)
 ***  
-# KnstAsyncApi ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApi) & KnstAsyncApiUI ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApiUI)
+# [KnstAsyncApi](https://www.nuget.org/packages/KnstAsyncApi) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApi) & [KnstAsyncApiUI](https://www.nuget.org/packages/KnstAsyncApiUI) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApiUI)
 #### Requirements  
 * Node.js v12.16+
 * npm v6.13.7+
