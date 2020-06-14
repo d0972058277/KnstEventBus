@@ -20,4 +20,7 @@
     <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
     <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- <PackageReference Include="KnstAsyncApiUI" Version="1.0.2-pre" /> -->
+  </ItemGroup>
 </Project>

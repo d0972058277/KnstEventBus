@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>1.0.0-pre</PackageVersion>
+    <PackageVersion>1.0.2-pre</PackageVersion>
     <Authors>PorriDG3</Authors>
     <Owners>PorriDG3</Owners>
     <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
@@ -29,7 +29,7 @@
     <Content Include="package-lock.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="node_modules/**/*" Exclude="**/*/*.ps1">
+    <Content Include="node_modules/**/*" Exclude="**/*/*.ps1;**/*/*.md;**/*/.DS_Store;**/*/LICENSE;**/*/Dockerfile;**/*/*.map;node_modules/.bin/**/*;**/*/.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
