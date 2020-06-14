@@ -1,10 +1,22 @@
-#### Reference
+#### Reference and Thanks
 [AsyncApi](https://www.asyncapi.com/)  
 [tehmantra/saunter](https://github.com/tehmantra/saunter)  
 [domaindrivendev/Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)  
 [dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers/tree/dotnet3-migration/dev-dotnet3)
 ***  
-# KnstAsyncApi & KnstAsyncApiUI
+# [KnstAsyncApi](https://www.nuget.org/packages/KnstAsyncApi) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApi) & [KnstAsyncApiUI](https://www.nuget.org/packages/KnstAsyncApiUI) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApiUI)
+#### Requirements  
+* Node.js v12.16+
+* npm v6.13.7+
+### Add "Target Tag" into your .csproj file
+```
+<Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
+    <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">
+        <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js/npm is required to build this project. To continue, please install Node.js from https://nodejs.org/ or Visual Studio Installer, and then restart your command prompt or IDE." />
+</Target>
+```
 ### Register in Startup.cs ConfigureServices
 ```
 services.AddAsyncApi(options =>
