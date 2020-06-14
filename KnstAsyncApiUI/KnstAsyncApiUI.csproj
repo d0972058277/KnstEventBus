@@ -22,18 +22,21 @@
   <ItemGroup>
     <Content Include="app.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="package.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="package-lock.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Include="node_modules/**/*" Exclude="**/*/*.ps1;**/*/*.md;**/*/.DS_Store;**/*/LICENSE;**/*/Dockerfile;**/*/*.map;node_modules/.bin/**/*;**/*/.*">
+    <None Include="node_modules/**/*" Exclude="**/*/*.ps1;**/*/*.md;**/*/.DS_Store;**/*/LICENSE;**/*/Dockerfile;**/*/*.map;node_modules/.bin/**/*;**/*/.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-  <Target Name="NpmInstall" BeforeTargets="Build">
+  <Target Name="NpmInstall" BeforeTargets="Build" Condition="!Exists('node_modules')">
     <Exec Command="npm install" ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
     </Exec>

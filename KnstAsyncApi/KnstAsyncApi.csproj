@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>1.0.0-pre</PackageVersion>
+    <PackageVersion>1.0.2-pre</PackageVersion>
     <Authors>PorriDG3</Authors>
     <Owners>PorriDG3</Owners>
     <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
@@ -18,6 +18,5 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
     <PackageReference Include="Namotion.Reflection" Version="1.0.12" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <!-- <PackageReference Include="System.Text.Json" Version="4.7.2" /> -->
   </ItemGroup>
 </Project>
