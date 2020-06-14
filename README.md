@@ -8,7 +8,7 @@
 #### Requirements  
 * Node.js v12.16+
 * npm v6.13.7+
-### Add "Target Mark" into your .csproj file
+### Add "Target Tag" into your .csproj file
 ```
 <Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
     <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">
