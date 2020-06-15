@@ -2,7 +2,9 @@
 [AsyncApi](https://www.asyncapi.com/)  
 [tehmantra/saunter](https://github.com/tehmantra/saunter)  
 [domaindrivendev/Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)  
-[dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers/tree/dotnet3-migration/dev-dotnet3)
+[dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers/tree/dotnet3-migration/dev-dotnet3)  
+[RicoSuter/Namotion.Reflection](https://github.com/RicoSuter/Namotion.Reflection)  
+[JeringTech/Javascript.NodeJS](https://github.com/JeringTech/Javascript.NodeJS)
 ***  
 # [KnstAsyncApi](https://www.nuget.org/packages/KnstAsyncApi) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApi) & [KnstAsyncApiUI](https://www.nuget.org/packages/KnstAsyncApiUI) ![Nuget](https://img.shields.io/nuget/v/KnstAsyncApiUI)
 #### Requirements  
