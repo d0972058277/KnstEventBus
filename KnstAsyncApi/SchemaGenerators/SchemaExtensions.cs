@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using AnnotationsDataType = System.ComponentModel.DataAnnotations.DataType;
-using KnstAsyncApi.Schemas.V2;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using KnstAsyncApi.Schemas.V2;
 
 namespace KnstAsyncApi.SchemaGenerators
 {
@@ -14,7 +14,7 @@ namespace KnstAsyncApi.SchemaGenerators
             {
                 if (attribute is DefaultValueAttribute defaultValue && defaultValue.Value != null)
                 {
-                    schema.Example = (attribute as DefaultValueAttribute).ToString();
+                    schema.Example = (attribute as DefaultValueAttribute).Value.ToString();
                 }
                 else if (attribute is RegularExpressionAttribute regex)
                 {
@@ -22,13 +22,13 @@ namespace KnstAsyncApi.SchemaGenerators
                 }
                 else if (attribute is RangeAttribute range)
                 {
-                    schema.Maximum = decimal.TryParse(range.Maximum.ToString(), out decimal maximum)
-                        ? maximum
-                        : schema.Maximum;
+                    schema.Maximum = decimal.TryParse(range.Maximum.ToString(), out decimal maximum) ?
+                        maximum :
+                        schema.Maximum;
 
-                    schema.Minimum = decimal.TryParse(range.Minimum.ToString(), out decimal minimum)
-                        ? minimum
-                        : schema.Minimum;
+                    schema.Minimum = decimal.TryParse(range.Minimum.ToString(), out decimal minimum) ?
+                        minimum :
+                        schema.Minimum;
                 }
                 else if (attribute is MinLengthAttribute minLength)
                 {
@@ -57,9 +57,9 @@ namespace KnstAsyncApi.SchemaGenerators
                 }
                 else if (attribute is DataTypeAttribute dataTypeAttribute && schema.Type == "string")
                 {
-                    schema.Format = DataTypeFormatMap.TryGetValue(dataTypeAttribute.DataType, out string format)
-                        ? format
-                        : schema.Format;
+                    schema.Format = DataTypeFormatMap.TryGetValue(dataTypeAttribute.DataType, out string format) ?
+                        format :
+                        schema.Format;
                 }
                 //else if (attribute is RequiredAttribute)
                 //{
@@ -73,8 +73,7 @@ namespace KnstAsyncApi.SchemaGenerators
         }
 
         private static readonly Dictionary<AnnotationsDataType, string> DataTypeFormatMap = new Dictionary<AnnotationsDataType, string>
-        {
-            { AnnotationsDataType.Date, "date" },
+        { { AnnotationsDataType.Date, "date" },
             { AnnotationsDataType.DateTime, "date-time" },
             { AnnotationsDataType.Time, "time" },
             { AnnotationsDataType.Duration, "duration" },
