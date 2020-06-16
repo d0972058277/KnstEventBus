@@ -57,7 +57,7 @@ namespace KnstAsyncApi.Schemas.V2
         public ISchema Items { get; set; }
 
         [JsonProperty("example")]
-        public string Example { get; set; }
+        public object Example { get; set; }
 
         [JsonProperty("enum")]
         public IList<string> Enum { get; set; }

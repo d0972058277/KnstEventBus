@@ -14,7 +14,7 @@ namespace KnstAsyncApi.SchemaGenerators
             {
                 if (attribute is DefaultValueAttribute defaultValue && defaultValue.Value != null)
                 {
-                    schema.Example = (attribute as DefaultValueAttribute).Value.ToString();
+                    schema.Example = (attribute as DefaultValueAttribute).Value;
                 }
                 else if (attribute is RegularExpressionAttribute regex)
                 {
