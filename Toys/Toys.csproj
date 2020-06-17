@@ -19,8 +19,8 @@
     <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KnstAsyncApi" Version="1.0.2-pre" />
-    <PackageReference Include="KnstAsyncApiUI" Version="1.0.2-pre" />
+    <PackageReference Include="KnstAsyncApi" Version="1.0.3-pre" />
+    <PackageReference Include="KnstAsyncApiUI" Version="1.0.3-pre" />
   </ItemGroup>
   <Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
     <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">
