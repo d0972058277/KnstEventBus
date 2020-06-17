@@ -116,6 +116,12 @@ namespace KnstAsyncApi.SchemaGenerators
                 (schema as Schema).ApplyCustomAttributes(customAttributes);
             }
 
+            if (!(schema is Reference))
+            {
+                (schema as Schema).ReadOnly = serializerMember.IsReadOnly;
+                (schema as Schema).WriteOnly = serializerMember.IsWriteOnly;
+            }
+
             return schema;
         }
 
@@ -143,7 +149,7 @@ namespace KnstAsyncApi.SchemaGenerators
                 schema.Format = null;
                 schema.Enum = dataContract.EnumValues
                     .Distinct()
-                    .Select(value => value.ToString()) // ??�設 Enum 轉�?�串
+                    .Select(value => value.ToString()) // ??�設 Enum 轉�?�串
                     .ToList();
             }
 

@@ -47,6 +47,12 @@ namespace KnstAsyncApi.Schemas.V2
         [JsonProperty("uniqueItems")]
         public bool? UniqueItems { get; set; }
 
+        [JsonProperty("readOnly")]
+        public bool? ReadOnly { get; set; }
+
+        [JsonProperty("writeOnly")]
+        public bool? WriteOnly { get; set; }
+
         [JsonProperty("pattern")]
         public string Pattern { get; set; }
 
