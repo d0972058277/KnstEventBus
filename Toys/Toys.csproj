@@ -18,13 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
-    <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
-    <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj" />
   </ItemGroup>
-  <Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
-    <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">
-      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-    </Exec>
-    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js/npm is required to build this project. To continue, please install Node.js from https://nodejs.org/ or Visual Studio Installer, and then restart your command prompt or IDE." />
-  </Target>
+  <ItemGroup>
+    <PackageReference Include="KnstAsyncApi" Version="1.1.0" />
+    <PackageReference Include="KnstAsyncApiUI" Version="1.0.5" />
+  </ItemGroup>
 </Project>

@@ -10,15 +10,11 @@
 #### Requirements  
 * Node.js v12.16+
 * npm v6.13.7+
-### Add "Target Tag" into your .csproj file
-```
-<Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
-    <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">
-        <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-    </Exec>
-    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js/npm is required to build this project. To continue, please install Node.js from https://nodejs.org/ or Visual Studio Installer, and then restart your command prompt or IDE." />
-</Target>
-```
+
+### Install
+dotnet add package KnstAsyncApi --version 1.1.0
+dotnet add package KnstAsyncApiUI --version 1.0.5
+
 ### Register in Startup.cs ConfigureServices
 ```
 services.AddAsyncApi(options =>
