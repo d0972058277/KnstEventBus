@@ -4,6 +4,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\netcoreapp3.1\Toys.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Pubs\**" />
@@ -17,10 +18,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="KnstAsyncApi" Version="1.0.3-pre" />
-    <PackageReference Include="KnstAsyncApiUI" Version="1.0.3-pre" />
+    <ProjectReference Include="..\KnstAsyncApi\KnstAsyncApi.csproj" />
+    <ProjectReference Include="..\KnstAsyncApiUI\KnstAsyncApiUI.csproj" />
   </ItemGroup>
   <Target Name="NpmInstall" AfterTargets="Build;Publish;" Condition="!Exists('bin\$(Configuration)\$(TargetFramework)\node_modules')">
     <Exec WorkingDirectory="bin\$(Configuration)\$(TargetFramework)\" Command="npm install" ContinueOnError="true">

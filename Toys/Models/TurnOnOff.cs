@@ -6,7 +6,7 @@ namespace Toys.Models
     /// <summary>
     /// Command a particular streetlight to turn the lights on or off.
     /// </summary>
-    public class TurnOnOff : IntegrationEvent
+    public class TurnOnOff
     {
         [Required]
         public string StreetlightId { get; set; }

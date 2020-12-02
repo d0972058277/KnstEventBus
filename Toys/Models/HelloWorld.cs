@@ -3,7 +3,7 @@ using KnstEventBus;
 
 namespace Toys.Models
 {
-    public class HelloWorld : IntegrationEvent
+    public class HelloWorld
     {
         [DefaultValue(new [] { "Hi Toys!", "Hello World!" })]
         public string[] Messages { get; set; }

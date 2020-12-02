@@ -6,7 +6,7 @@ namespace Toys.Models
     /// <summary>
     /// Inform about environmental lighting conditions for a particular streetlight.
     /// </summary>
-    public class LightMeasured : IntegrationEvent
+    public class LightMeasured
     {
         [Required]
         public string StreetlightId { get; set; }

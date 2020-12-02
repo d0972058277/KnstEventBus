@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KnstAsyncApi.Schemas.V2.Abstracts;
 using Newtonsoft.Json;
 
 namespace KnstAsyncApi.Schemas.V2
@@ -28,7 +29,7 @@ namespace KnstAsyncApi.Schemas.V2
 
         [JsonProperty("message")]
         // public Message Message { get; set; }
-        public Reference Message { get; set; }
+        public IOperationMessage Message { get; set; }
 
         [JsonProperty("traits")]
         public IList<IOperationTrait> Traits { get; set; } = new List<IOperationTrait>();

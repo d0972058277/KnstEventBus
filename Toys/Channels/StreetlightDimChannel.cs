@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using KnstAsyncApi.Attributes;
 using KnstEventBus;
+using KnstEventBus.Channels;
 using Toys.Models;
 
 namespace Toys.Channels
 {
     [AsyncApi]
     [Channel("pubsub/StreetlightDim")]
-    [Message(typeof(DimLight))]
-    public class StreetlightDimChannel : IChannel<DimLight>
+    public class StreetlightDimChannel : ISubChannel
     {
         public Task PublishAsync(DimLight @event) => Task.CompletedTask;
 
@@ -17,6 +17,7 @@ namespace Toys.Channels
         /// </summary>
         /// <returns></returns>
         [Subscribe]
+        [Message(typeof(DimLight))]
         public Task SubscribeAsync()
         {
             throw new System.NotImplementedException();

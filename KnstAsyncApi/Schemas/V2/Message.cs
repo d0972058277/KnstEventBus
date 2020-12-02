@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KnstAsyncApi.Schemas.V2.Abstracts;
 using Newtonsoft.Json;
 
 namespace KnstAsyncApi.Schemas.V2
@@ -6,7 +7,7 @@ namespace KnstAsyncApi.Schemas.V2
     /// <summary>
     /// https://www.asyncapi.com/docs/specifications/2.0.0/#a-name-messageobject-a-message-object
     /// </summary>
-    public class Message
+    public class Message : IOperationMessage
     {
         [JsonProperty("headers")]
         public ISchema Headers { get; set; }

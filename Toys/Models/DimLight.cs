@@ -6,7 +6,7 @@ namespace Toys.Models
     /// <summary>
     /// Command a particular streetlight to dim the lights.
     /// </summary>
-    public class DimLight : IntegrationEvent
+    public class DimLight
     {
         /// <summary>
         /// Percentage to which the light should be dimmed to.

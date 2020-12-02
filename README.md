@@ -50,19 +50,20 @@ app.UseAsyncApiUI();
 /// </summary>
 [AsyncApi]
 [Channel("pubsub/HelloWorld")]
-[Message(typeof(HelloWorld))]
-public class HelloWorldChannel : IChannel<HelloWorld>
+public class HelloWorldChannel : IPubChannel<HelloWorld>, ISubChannel
 {
     /// <summary>
     /// HelloWorld Pub Summary
     /// </summary>
     [Publish]
+    [Message(typeof(HelloWorld))]
     public Task PublishAsync(HelloWorld @event) => Task.CompletedTask;
 
     /// <summary>
     /// HelloWorld Sub Summary
     /// </summary>
     [Subscribe]
+    [Message(typeof(HelloWorld))]
     public Task SubscribeAsync() => Task.CompletedTask;
 
     public Task UnSubscribeAsync() => Task.CompletedTask;

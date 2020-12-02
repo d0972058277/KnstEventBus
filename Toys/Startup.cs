@@ -36,9 +36,7 @@ The Smartylighting Streetlights API allows you to remotely manage the city light
             });
             services.AddAsyncApiUI();
 
-            services.AddTransient<IChannel<LightMeasured>, LightingMeasuredChannel>();
-            services.AddTransient<IChannel<TurnOnOff>, StreetlightTurnOnOffChannel>();
-            services.AddTransient<IChannel<DimLight>, StreetlightDimChannel>();
+            services.AddKnstEventBus();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 using System;
+using KnstAsyncApi.Schemas.V2.Abstracts;
 using Newtonsoft.Json;
 
 namespace KnstAsyncApi.Schemas.V2
@@ -7,7 +8,7 @@ namespace KnstAsyncApi.Schemas.V2
     /// https://www.asyncapi.com/docs/specifications/2.0.0/#a-name-referenceobject-a-reference-object
     /// A reference to some other object within the asyncapi document. 
     /// </summary>
-    public class Reference : ISchema
+    public class Reference : ISchema, IOperationMessage
     {
         public Reference(string id, ReferenceType type)
         {
@@ -30,7 +31,7 @@ namespace KnstAsyncApi.Schemas.V2
     public class ReferenceType
     {
         public static readonly ReferenceType Message = new ReferenceType(nameof(Message), "#/components/messages/{0}");
-        
+
         public static readonly ReferenceType Schema = new ReferenceType(nameof(Schema), "#/components/schemas/{0}");
 
         public static readonly ReferenceType MessageTrait = new ReferenceType(nameof(MessageTrait), "#/components/messageTraits/{0}");
