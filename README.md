@@ -12,8 +12,10 @@
 * npm v6.13.7+
 
 ### Install
+```
 dotnet add package KnstAsyncApi --version 1.1.0
 dotnet add package KnstAsyncApiUI --version 1.0.5
+```
 
 ### Register in Startup.cs ConfigureServices
 ```
