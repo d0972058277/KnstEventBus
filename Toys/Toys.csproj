@@ -21,6 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="KnstAsyncApi" Version="1.1.0" />
-    <PackageReference Include="KnstAsyncApiUI" Version="1.0.7" />
+    <PackageReference Include="KnstAsyncApiUI" Version="1.0.8" />
   </ItemGroup>
 </Project>

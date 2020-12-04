@@ -14,7 +14,7 @@
 ### Install
 ```
 dotnet add package KnstAsyncApi --version 1.1.0
-dotnet add package KnstAsyncApiUI --version 1.0.7
+dotnet add package KnstAsyncApiUI --version 1.0.8
 ```
 
 ### Register in Startup.cs ConfigureServices
