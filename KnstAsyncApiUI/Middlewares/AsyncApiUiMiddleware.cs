@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Jering.Javascript.NodeJS;
 using Microsoft.AspNetCore.Hosting;
@@ -10,17 +11,24 @@ namespace KnstAsyncApiUI.Middlewares
     public class AsyncApiUiMiddleware
     {
         private readonly RequestDelegate _next;
+        private IHttpClientFactory _httpClientFactory;
 
-        public AsyncApiUiMiddleware(RequestDelegate next, IHostingEnvironment hostingEnv, ILoggerFactory loggerFactory)
+        public AsyncApiUiMiddleware(RequestDelegate next, IHostingEnvironment hostingEnv, ILoggerFactory loggerFactory, IHttpClientFactory httpClientFactory)
         {
             _next = next;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task Invoke(HttpContext context, INodeJSService nodeService)
         {
             if (IsRequestingAsyncApiIndex(context.Request))
             {
-                await nodeService.InvokeFromFileAsync($"{AppDomain.CurrentDomain.BaseDirectory}/app.js", args: new[] { $"{context.Request.Scheme}://{context.Request.Host.Value}/asyncapi/asyncapi.json", "AsyncApi" });
+                using(var client = _httpClientFactory.CreateClient())
+                using(var response = await client.GetAsync($"{context.Request.Scheme}://{context.Request.Host.Value}/asyncapi/asyncapi.json"))
+                {
+                    var asyncapiDocument = await response.Content.ReadAsStringAsync();
+                    await nodeService.InvokeFromFileAsync($"{AppDomain.CurrentDomain.BaseDirectory}/app.js", args : new [] { asyncapiDocument, "AsyncApi" });
+                }
             }
             await _next(context);
         }
