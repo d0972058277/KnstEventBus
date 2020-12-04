@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>1.0.7</PackageVersion>
+    <PackageVersion>1.0.8</PackageVersion>
     <Authors>PorriDG3</Authors>
     <Owners>PorriDG3</Owners>
     <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
@@ -14,11 +14,11 @@
     <PackageTags>AsyncApiUI;asyncapiui;KnstAsyncApiUI;knstasyncapiui;codefirst;code-first;documentation-generator;</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Jering.Javascript.NodeJS" Version="5.4.3"/>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.1.5"/>
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0"/>
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5"/>
+    <PackageReference Include="Jering.Javascript.NodeJS" Version="5.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js">
