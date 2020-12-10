@@ -1,6 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Authors>PorriDG3</Authors>
+    <Owners>PorriDG3</Owners>
+    <PackageProjectUrl>https://github.com/d0972058277/KnstEventBus</PackageProjectUrl>
+    <Title>KnstEventBus</Title>
+    <Copyright>PorriDG3</Copyright>
+    <PackOnBuild>true</PackOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>knst;eventbus;knsteventbus</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.10" />
