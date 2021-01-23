@@ -20,7 +20,7 @@
     <ProjectReference Include="..\KnstEventBus\KnstEventBus.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KnstAsyncApi" Version="1.1.0" />
+    <PackageReference Include="KnstAsyncApi" Version="1.1.1" />
     <PackageReference Include="KnstAsyncApiUI" Version="1.0.8" />
   </ItemGroup>
 </Project>
