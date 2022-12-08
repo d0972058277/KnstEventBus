@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "@asyncapi/generator": "^1.0.1"
+    "@asyncapi/generator": "^1.9.14"
   }
 }
